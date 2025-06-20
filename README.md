@@ -1,230 +1,100 @@
-Movie Review Application
-A robust and scalable Movie Review Application built using Spring Boot, designed to allow users to post, view, and manage movie reviews. This application provides a backend API that can be consumed by various clients.
+# 🎬 Movie Review Application
 
-Table of Contents
-Description
+This is a RESTful Movie Review Application built using **Java Spring Boot**, with **MySQL** as the database, **Maven** for dependency management, and **Lombok** to reduce boilerplate. It allows users to perform CRUD operations on movies and their reviews.
 
-Features
+---
 
-Technologies Used
+## 🚀 Features
 
-Prerequisites
+- Add, view, update, and delete movie details
+- Add and retrieve reviews for movies
+- Rate movies using stars or feedback
+- API tested using **Postman**
+- Built-in validation and exception handling
+- Hosted on **Apache Tomcat**
 
-Setup Instructions
+---
 
-Database Setup
+## 🛠️ Tech Stack
 
-Running the Application
+| Technology   | Purpose                             |
+|--------------|-------------------------------------|
+| Java         | Programming Language                |
+| Spring Boot  | Backend Framework                   |
+| Maven        | Build & Dependency Management       |
+| Lombok       | Reduces boilerplate code            |
+| MySQL        | Relational Database                 |
+| Tomcat       | Embedded Server                     |
+| Postman      | API Testing Tool                    |
 
-API Endpoints (with Postman)
+---
 
-Contributing
 
-License
+---
 
-Description
-This application serves as a backend service for a movie review platform. It enables users to:
+## 📦 Installation & Setup
 
-Register and authenticate.
+### ✅ Prerequisites
+- Java 17+
+- Maven
+- MySQL Server
+- Postman (optional for testing)
 
-Add new movies to the database.
+### 🔧 Steps to Run
 
-Post reviews for existing movies.
-
-View all movies.
-
-View reviews for a specific movie.
-
-Update or delete their own reviews.
-
-Features
-User Management: Register, login.
-
-Movie Management: Add, retrieve movies.
-
-Review Management: Create, read, update, delete reviews for movies.
-
-RESTful API: Provides a clean and consistent API for client interaction.
-
-Data Validation: Ensures data integrity for all incoming requests.
-
-Technologies Used
-Java: Programming language.
-
-Maven: Dependency management and build automation tool.
-
-Spring Boot: Framework for building robust, stand-alone, production-grade Spring-based applications.
-
-Spring Data JPA: Simplifies data access using JPA (Java Persistence API).
-
-Lombok: Library to reduce boilerplate code (e.g., getters, setters, constructors).
-
-MySQL: Relational database for storing application data.
-
-Tomcat (Embedded): Default embedded server provided by Spring Boot.
-
-Postman: Used for API testing and documentation.
-
-Prerequisites
-Before you begin, ensure you have the following installed:
-
-JDK 11 or higher
-
-Maven 3.6.x or higher
-
-MySQL Server (and a MySQL client like MySQL Workbench or DBeaver for database setup)
-
-Postman (Optional, but recommended for API testing)
-
-Setup Instructions
-Database Setup
-Create Database:
-Open your MySQL client and execute the following SQL command to create a new database for the application:
-
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/movie-review-app.git
+   cd movie-review-app
+   ----------------------------
+----Set up MySQL Database---- 
 CREATE DATABASE movie_review_db;
+Update application.properties
 
-Configure application.properties:
-Navigate to src/main/resources/application.properties in your project and configure the database connection details. Replace your_mysql_username and your_mysql_password with your actual MySQL credentials.
+PROPERTIES
+----------
 
-# Server configuration
-server.port=8080
-
-# Spring Data JPA and Hibernate configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/movie_review_db
+spring.datasource.username=root
+spring.datasource.password=yourpassword
 spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
-# MySQL Database Connection
-spring.datasource.url=jdbc:mysql://localhost:3306/movie_review_db?useSSL=false&serverTimezone=UTC
-spring.datasource.username=your_mysql_username
-spring.datasource.password=your_mysql_password
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+📬 API Endpoints
 
-spring.jpa.hibernate.ddl-auto=update: This setting will automatically create or update your database schema based on your JPA entities. For production environments, it's often set to validate or none with manual schema management.
+| Method | Endpoint     | Description     |
+| ------ | ------------ | --------------- |
+| GET    | /movies      | Get all movies  |
+| GET    | /movies/{id} | Get movie by ID |
+| POST   | /movies      | Add new movie   |
+| PUT    | /movies/{id} | Update a movie  |
+| DELETE | /movies/{id} | Delete a movie  |
 
-Running the Application
-Clone the Repository (if applicable):
-If your project is in a Git repository, clone it:
+⭐ Review APIs
 
-git clone <your-repository-url>
-cd movie-review-application
+| Method | Endpoint             | Description               |
+| ------ | -------------------- | ------------------------- |
+| POST   | /movies/{id}/reviews | Add a review to movie     |
+| GET    | /movies/{id}/reviews | Get all reviews for movie |
 
-Build the Project:
-Open a terminal or command prompt in the root directory of your project (where pom.xml is located) and run the Maven clean and install command:
+🧪 Testing
+You can import the provided Postman collection (if any) or manually test using:
 
-mvn clean install
+POST /movies with JSON body
 
-This will compile the project, run tests, and package the application into a JAR file.
+GET /movies for listing
 
-Run the Spring Boot Application:
-After a successful build, you can run the application using the Spring Boot Maven plugin:
+POST /movies/{id}/reviews for adding reviews
 
-mvn spring-boot:run
-
-Alternatively, you can run the generated JAR file:
-
-java -jar target/movie-review-application.jar # Replace 'movie-review-application.jar' with your actual JAR file name
-
-The application will start on the port configured in application.properties (default: 8080). You should see logs indicating that Tomcat has started.
-
-API Endpoints (with Postman)
-Once the application is running, you can use Postman (or any other API client) to test the endpoints. Here's a summary of common endpoints you might have:
-
-User Endpoints
-POST /api/users/register
-
-Description: Register a new user.
-
-Body (JSON):
-
+📸 Sample JSON Request
 {
-    "username": "testuser",
-    "password": "password123",
-    "email": "test@example.com"
+  "title": "Inception",
+  "description": "A mind-bending thriller",
+  "releaseYear": 2010
 }
 
-POST /api/users/login
-
-Description: Authenticate user and get a token (if using JWT).
-
-Body (JSON):
-
 {
-    "username": "testuser",
-    "password": "password123"
+  "reviewer": "John Doe",
+  "comment": "Amazing visuals and concept!",
+  "rating": 5
 }
 
-Movie Endpoints
-POST /api/movies
-
-Description: Add a new movie. (Requires authentication, e.g., Admin role)
-
-Body (JSON):
-
-{
-    "title": "Inception",
-    "genre": "Sci-Fi",
-    "releaseYear": 2010,
-    "director": "Christopher Nolan"
-}
-
-GET /api/movies
-
-Description: Get all movies.
-
-GET /api/movies/{movieId}
-
-Description: Get a movie by ID.
-
-Review Endpoints
-POST /api/movies/{movieId}/reviews
-
-Description: Add a review for a specific movie. (Requires user authentication)
-
-Body (JSON):
-
-{
-    "rating": 5,
-    "comment": "Absolutely mind-bending!",
-    "userId": "uuid-of-the-reviewer" // Or derived from authenticated user
-}
-
-GET /api/movies/{movieId}/reviews
-
-Description: Get all reviews for a specific movie.
-
-GET /api/reviews/{reviewId}
-
-Description: Get a single review by ID.
-
-PUT /api/reviews/{reviewId}
-
-Description: Update an existing review. (Requires authentication, only owner can update)
-
-Body (JSON):
-
-{
-    "rating": 4,
-    "comment": "Still great, but watched it too many times."
-}
-
-DELETE /api/reviews/{reviewId}
-
-Description: Delete a review. (Requires authentication, only owner or admin can delete)
-
-Note: Specific endpoint paths and request/response bodies may vary based on your actual implementation.
-
-Contributing
-Contributions are welcome! Please follow these steps:
-
-Fork the repository.
-
-Create a new branch (git checkout -b feature/your-feature-name).
-
-Make your changes.
-
-Commit your changes (git commit -am 'Add new feature').
-
-Push to the branch (git push origin feature/your-feature-name).
-
-Create a new Pull Request.
